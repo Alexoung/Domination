@@ -72,7 +72,18 @@ public class Main {
 				System.out.println("\n" + "Tour de "+ ljoueurs[i].getName());
 				System.out.println("Grille de " + ljoueurs[i].getName());
 				Plateau.afficher(ljoueurs[i].grille);
-				Plateau.selection(currentpioche);
+				int select = Dominos.selection(currentpioche);
+				String conf;
+				do{
+					Plateau.poser(allist.get(select), ljoueurs[i].grille);
+					Plateau.afficher(ljoueurs[i].grille);
+					System.out.println("confirmer cette dispo?");
+					System.out.println("oui/non");
+					conf = scan.nextLine();
+				}//MANQUE CONFIRMATION ET ANNULATION DE LA DISPOSITION SI NON CONFIRMEE
+				while(conf.equals("oui")==false);
+				
+				
 				
 			}
 			}

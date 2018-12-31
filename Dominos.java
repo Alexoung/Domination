@@ -31,46 +31,47 @@ public class Dominos {
 
 	public static void main(String[] args){ 
 
-// 		ArrayList<ArrayList<String>> allist = new ArrayList<ArrayList<String>>();
-
-// 		//String[][] list = new String[50][5];
-// 		//int ligne = 0;
-// 		try {
-
-// 			Scanner scanner = new Scanner(new File("dominos.csv"));
-// 			while (scanner.hasNext()) {
-// 				String line = scanner.nextLine();
-// 				String[] elements = line.split(",");
-// 				ArrayList<String> currentdom = new ArrayList<String>();
-// 				for (int i=0; i<elements.length; i++) {
-// 					currentdom.add(elements[i]);
-// 				}
-// 				allist.add(currentdom);
-// //				ligne+=1;
-// //				for (int i =0; i<elements.length; i++) {
-// //					list[ligne][i]= elements[i];
-// //					ligne+= 1;
-// //				}	
-
-// 			}
-// 			System.out.println(allist.get(1).get(3));
-// 			//System.out.println(list[2][1]);
-
-// 		} 
-// 		catch (FileNotFoundException e) {
-// 			System.out.println("Fichier non trouvé");
-// 		}
+//		ArrayList<ArrayList<String>> allist = new ArrayList<ArrayList<String>>();
+//
+//		//String[][] list = new String[50][5];
+//		//int ligne = 0;
+//		try {
+//
+//			Scanner scanner = new Scanner(new File("dominos.csv"));
+//			while (scanner.hasNext()) {
+//				String line = scanner.nextLine();
+//				String[] elements = line.split(",");
+//				ArrayList<String> currentdom = new ArrayList<String>();
+//				for (int i=0; i<elements.length; i++) {
+//					currentdom.add(elements[i]);
+//				}
+//				allist.add(currentdom);
+////				ligne+=1;
+////				for (int i =0; i<elements.length; i++) {
+////					list[ligne][i]= elements[i];
+////					ligne+= 1;
+////				}	
+//
+//			}
+//			System.out.println(allist.get(1).get(3));
+//			//System.out.println(list[2][1]);
+//
+//		} 
+//		catch (FileNotFoundException e) {
+//			System.out.println("Fichier non trouvé");
+//		}
 	}
 	
 	
 	
 	
-	Stack<Integer> pioche = new Stack<Integer>();{
-	for (int i=0;i<49 ; i++) {
-		int num = (int)Math.random()*49;
-	}
-	
-	}
+	Stack<Integer> pioche = new Stack<Integer>();
+//	{
+//	for (int i=0;i<49 ; i++) {
+//		int num = (int)Math.random()*49;
+//	}
+//	
+//	}
 	
 	public static void melange(Stack<Integer> pioche) {
 		while(pioche.size()!=48) {
