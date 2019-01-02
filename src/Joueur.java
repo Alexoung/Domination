@@ -6,11 +6,11 @@ import java.util.Scanner;
 public class Joueur {
 	String name ;
 	String color;
-	String[][] grille;
+	String[][][] grille;
 	
 	
 	
-	public Joueur (String name, String color, String[][] grille) {
+	public Joueur (String name, String color, String[][][] grille) {
 		this.name = name;
 		this.color = color;
 		this.grille = grille;
@@ -43,13 +43,13 @@ public class Joueur {
 	
 
 
-	public String[][] getGrille() {
+	public String[][][] getGrille() {
 		return grille;
 	}
 
 
 
-	public void setGrille(String[][] grille) {
+	public void setGrille(String[][][] grille) {
 		this.grille = grille;
 	}
 
@@ -57,7 +57,7 @@ public class Joueur {
 	public static Joueur nvjoueur(ArrayList<String> list, int njoueur){
 		Scanner scan = new Scanner(System.in);
 		String couleur;
-		//int[][] grille;
+		//int[][][] grille;
 		System.out.println("NOM du joueur "+ (njoueur+1));
 		String nom = scan.nextLine();
 			do {
@@ -68,13 +68,14 @@ public class Joueur {
 			couleur = scan.nextLine();
 			}
 		while(list.contains(couleur)!=true);
-		String[][] grille = new String[9][9];
+		String[][][] grille = new String[9][9][2];
 		for (int i=0; i<9 ; i++) {
 			for(int j=0 ; j<9 ; j++) {
-				grille[i][j] = "0";
+				grille[i][j][0] = "0";
+				grille[i][j][1] = "0";
 			}
 		}
-		grille[4][4]= "2";
+		grille[4][4][0]= "2";
 		list.remove(new String(couleur));
 		
 		return new Joueur(nom, couleur, grille);

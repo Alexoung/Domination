@@ -71,11 +71,11 @@ public class Main {
 
 				System.out.println("\n" + "Tour de "+ ljoueurs[i].getName());
 				System.out.println("Grille de " + ljoueurs[i].getName());
-				String[][] grille_init = ljoueurs[i].grille;
+				String[][][] grille_init = ljoueurs[i].grille;
 				Plateau.afficher(grille_init);
 				int select = Dominos.selection(currentpioche);
 				//String conf;
-				String [][] grille_suivante;
+				String [][][] grille_suivante;
 				
 				do{
 					System.out.println("Domino à placer");
