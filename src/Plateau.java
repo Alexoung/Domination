@@ -13,6 +13,8 @@ public class Plateau {
 	
 	
 	public static void afficher(String[][][] list) {
+		System.out.print("Terrain");
+		System.out.print("\n");
 		System.out.print("  ");
 		for (int a=0 ; a<9 ; a++) {
 			System.out.print(a+1);
@@ -24,12 +26,30 @@ public class Plateau {
 			for (int j=0; j<9 ; j++) {
 			
 			System.out.print((list[i][j][0]));
-			if (j==8) {
-				System.out.print("\n");
+				if (j==8) {
+					System.out.print("\n");
+				}
 			}
 		}
+		System.out.print("\n");
+		System.out.print("Couronnes");
+		System.out.print("\n");
+		System.out.print("  ");
+		for (int a=0 ; a<9 ; a++) {
+			System.out.print(a+1);
+			
+		}System.out.print("\n");
+		for (int i=0 ; i<9 ; i++) {
+			System.out.print((i+1));
+			System.out.print(" ");
+			for (int j=0; j<9 ; j++) {
+			
+			System.out.print((list[i][j][1]));
+				if (j==8) {
+					System.out.print("\n");
+				}
+			}
 		}
-	
 		
 	}
 		
