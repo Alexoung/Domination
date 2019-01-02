@@ -13,9 +13,17 @@ public class Plateau {
 	
 	
 	public static void afficher(String[][] list) {
+		System.out.print("  ");
+		for (int a=0 ; a<9 ; a++) {
+			System.out.print(a+1);
+			
+		}System.out.print("\n");
 		for (int i=0 ; i<9 ; i++) {
+			System.out.print((i+1));
+			System.out.print(" ");
 			for (int j=0; j<9 ; j++) {
-			System.out.print(list[i][j]);
+			
+			System.out.print((list[i][j]));
 			if (j==8) {
 				System.out.print("\n");
 			}
@@ -39,7 +47,14 @@ public class Plateau {
 //		return select;
 //	}
 	
-	public static int[] poser (ArrayList<String> Domino, String[][] grille) {
+	public static String[][] poser (ArrayList<String> Domino, String[][] grille) {
+		String[][] grille_cop= new String[9][9];
+		for (int i=0; i<9 ; i++) {
+			for (int j=0; j<9 ;j++) {
+				grille_cop[i][j] = grille[i][j];
+			}
+		}
+		
 		Scanner scan = new Scanner(System.in);
 		String ho_ve;
 		String part_pos;
@@ -58,20 +73,62 @@ public class Plateau {
 		int abs ;
 		int ord ;
 			System.out.println("coordonnées de la partie a poser");
+			System.out.println("ligne");
 			abs = scan.nextInt();
+			System.out.println("colonne");
 			ord = scan.nextInt();
 			int[] coord= new int[2];
-		if (part_pos.equals(type_1) && ho_ve.equals("h")){
-			grille[abs-1][ord-1]= part_pos;
-			grille[abs-1][ord]= type_2;
-			coord[0] = abs;
-			coord[1] = ord;
-		}
-		if (part_pos.equals(type_1) && ho_ve.equals("v")) {
-			grille[abs-1][ord-1]= part_pos;
-			grille[abs][ord-1]= type_2;
-		}
-		return coord;
+			try {
+				if (part_pos.equals(type_1) && ho_ve.equals("h")){
+				grille_cop[abs-1][ord-1]= part_pos;
+				grille_cop[abs-1][ord]= type_2;
+				
+			}
+			
+			if (part_pos.equals(type_2) && ho_ve.equals("h")){
+				grille_cop[abs-1][ord-1]= part_pos;
+				grille_cop[abs-1][ord]= type_1;
+			}
+			if (part_pos.equals(type_1) && ho_ve.equals("v")) {
+				grille_cop[abs-1][ord-1]= part_pos;
+				grille_cop[abs][ord-1]= type_2;
+			}
+			if (part_pos.equals(type_2) && ho_ve.equals("v")) {
+				grille_cop[abs-1][ord-1]= part_pos;
+				grille_cop[abs][ord-1]= type_1;
+			}
+			
+				
+			}
+			catch(ArrayIndexOutOfBoundsException e){
+				System.out.println("Impossible de le placer");
+				if (part_pos.equals(type_1) && ho_ve.equals("h")){
+					grille_cop[abs-1][ord-1]= "0";
+					grille_cop[abs-1][ord]= "0";
+					
+				}
+				
+				if (part_pos.equals(type_2) && ho_ve.equals("h")){
+					grille_cop[abs-1][ord-1]= "0";
+					grille_cop[abs-1][ord]= "0";
+				}
+				if (part_pos.equals(type_1) && ho_ve.equals("v")) {
+					grille_cop[abs-1][ord-1]= "0";
+					grille_cop[abs][ord-1]= "0";
+				}
+				if (part_pos.equals(type_2) && ho_ve.equals("v")) {
+					grille_cop[abs-1][ord-1]= "0";
+					grille_cop[abs][ord-1]= "0";
+				}
+				
+				
+			}
+//			System.out.println("retourner?");
+//			if (retourner.equals(oui)){
+//				
+//			}
+		
+		return grille_cop;
 	}
 	
 	public static String confirmation() {
@@ -83,11 +140,10 @@ public class Plateau {
 		
 		return conf;
 	}
-	public static void annulation(String[][] grille, int[]coord) {
-		
-	}
 	
-	public void verif() {
+	
+	public void verif(int abs, int ord) {
+		
 		
 	}
 	

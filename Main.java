@@ -71,17 +71,22 @@ public class Main {
 
 				System.out.println("\n" + "Tour de "+ ljoueurs[i].getName());
 				System.out.println("Grille de " + ljoueurs[i].getName());
-				Plateau.afficher(ljoueurs[i].grille);
+				String[][] grille_init = ljoueurs[i].grille;
+				Plateau.afficher(grille_init);
 				int select = Dominos.selection(currentpioche);
-				String conf;
+				//String conf;
+				String [][] grille_suivante;
+				
 				do{
-					Plateau.poser(allist.get(select), ljoueurs[i].grille);
+					System.out.println("Domino à placer");
+					System.out.println(allist.get(select) + "\n");
 					Plateau.afficher(ljoueurs[i].grille);
-					System.out.println("confirmer cette dispo?");
-					System.out.println("oui/non");
-					conf = scan.nextLine();
-				}//MANQUE CONFIRMATION ET ANNULATION DE LA DISPOSITION SI NON CONFIRMEE
-				while(conf.equals("oui")==false);
+					grille_suivante = Plateau.poser(allist.get(select), ljoueurs[i].grille);
+					Plateau.afficher(grille_suivante);
+					//conf = Plateau.confirmation();
+					}//MANQUE CONFIRMATION ET ANNULATION DE LA DISPOSITION SI NON CONFIRMEE
+				while(Plateau.confirmation().equals("oui")==false);
+				ljoueurs[i].grille=grille_suivante;
 				
 				
 				
