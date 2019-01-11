@@ -31,41 +31,28 @@ public class Plateau {
 				}
 			}
 		}
-		System.out.print("\n");
-		System.out.print("Couronnes");
-		System.out.print("\n");
-		System.out.print("  ");
-		for (int a=0 ; a<9 ; a++) {
-			System.out.print(a+1);
-			
-		}System.out.print("\n");
-		for (int i=0 ; i<9 ; i++) {
-			System.out.print((i+1));
-			System.out.print(" ");
-			for (int j=0; j<9 ; j++) {
-			
-			System.out.print((list[i][j][1]));
-				if (j==8) {
-					System.out.print("\n");
-				}
-			}
-		}
+//		System.out.print("\n");
+//		System.out.print("Couronnes");
+//		System.out.print("\n");
+//		System.out.print("  ");
+//		for (int a=0 ; a<9 ; a++) {
+//			System.out.print(a+1);
+//			
+//		}System.out.print("\n");
+//		for (int i=0 ; i<9 ; i++) {
+//			System.out.print((i+1));
+//			System.out.print(" ");
+//			for (int j=0; j<9 ; j++) {
+//			
+//			System.out.print((list[i][j][1]));
+//				if (j==8) {
+//					System.out.print("\n");
+//				}
+//			}
+//		}
 		
 	}
 		
-//	public static int selection(ArrayList<Integer> nbpioche) {
-//
-//		Scanner scan = new Scanner(System.in);
-//		int select;
-//		do{
-//			System.out.println("Donner le numero du domino que vous voulez prendre");
-//			select = scan.nextInt();
-//		}
-//		while(nbpioche.contains(select)!=true);
-//		nbpioche.remove(new Integer (select));
-//		
-//		return select;
-//	}
 	
 	public static String[][][] poser (ArrayList<String> Domino, String[][][] grille) {
 		String[][][] grille_cop= new String[9][9][2];
@@ -80,6 +67,7 @@ public class Plateau {
 		Scanner scan = new Scanner(System.in);
 		String ho_ve;
 		String part_pos;
+		String part_autre;
 		String type_1 = Domino.get(1);
 		String crown_1 = Domino.get(0);
 		String type_2 = Domino.get(3);
@@ -92,80 +80,129 @@ public class Plateau {
 		do {
 			System.out.println("quelle partie poser? "+ type_1 +" ou "+ type_2);
 			part_pos= scan.nextLine();
+			if (part_pos == type_1) {
+				part_autre = type_2;
+			}
+			else {
+				part_autre = type_1;
+			}
 		}
 		while(part_pos.equals(type_1)==false && part_pos.equals(type_2)==false);
 		int lgn ;
 		int cln ;
+		int a_lgn;
+		int a_cln;
+		do {
+			
 			System.out.println("coordonnées de la partie a poser");
 			System.out.println("ligne");
 			lgn = scan.nextInt();
 			System.out.println("colonne");
 			cln = scan.nextInt();
-			int[] coord= new int[2];
+			a_lgn = lgn;
+			a_cln = cln;
+			//int[] coord= new int[2];
+			//System.out.println(pris(lgn,cln,grille));
+		
+			System.out.println("retourner?");
+			
+			boolean retourner = Plateau.retourner();
+			if ( ho_ve.equals("v") ) {
+				System.out.println("deuxieme partie en haut");
+				if(retourner == true) {
+					a_lgn = lgn-1;
+					a_cln = cln;
+				}
+				else {
+					a_lgn = lgn +1;
+					a_cln = cln;
+				}
+				
+			}
+			if ( ho_ve.equals("h")) {
+				System.out.println("deuxieme partie a gauche");
+				if(retourner == true){
+					a_lgn = lgn;
+					a_cln = cln-1;
+				}
+				else {
+					a_lgn= lgn;
+					a_cln = cln+1;
+				}
+				
+			}
+			System.out.println(pris(lgn-1,cln-1,grille));
+			System.out.println(pris(a_lgn-1, a_cln-1, grille));
+			System.out.println(okautour(lgn-1,cln-1,grille, part_pos));
+			System.out.println(okautour(a_lgn-1,a_cln-1,grille,part_autre));
+			if ( placement_bon(lgn,cln,a_lgn,a_cln, grille, part_pos, part_autre))  {
 			try {
-				if (part_pos.equals(type_1) && ho_ve.equals("h")){
+				if (part_pos.equals(type_1) && ho_ve.equals("h") ){
 				grille_cop[lgn-1][cln-1][0]= type_1;
 				grille_cop[lgn-1][cln-1][1]= crown_1;
-				grille_cop[lgn-1][cln][0]= type_2;
-				grille_cop[lgn-1][cln][1]= crown_2;
+				grille_cop[a_lgn-1][a_cln-1][0]= type_2;
+				grille_cop[a_lgn-1][a_cln-1][1]= crown_2;
 				
 			}
 			
-			if (part_pos.equals(type_2) && ho_ve.equals("h")){
+			if (part_pos.equals(type_2) && ho_ve.equals("h") ){
 				grille_cop[lgn-1][cln-1][0]= type_2;
 				grille_cop[lgn-1][cln-1][1]= crown_2;
-				grille_cop[lgn-1][cln][0]= type_1;
-				grille_cop[lgn-1][cln][1]= crown_1;
+				grille_cop[a_lgn-1][a_cln-1][0]= type_1;
+				grille_cop[a_lgn-1][a_cln-1][1]= crown_1;
 			}
-			if (part_pos.equals(type_1) && ho_ve.equals("v")) {
+			if (part_pos.equals(type_1) && ho_ve.equals("v") ) {
 				grille_cop[lgn-1][cln-1][0]= type_1;
 				grille_cop[lgn-1][cln-1][1]= crown_1;
-				grille_cop[lgn][cln-1][0]= type_2;
-				grille_cop[lgn][cln-1][1]= crown_2;
+				grille_cop[a_lgn-1][a_cln-1][0]= type_2;
+				grille_cop[a_lgn-1][a_cln-1][1]= crown_2;
 			}
-			if (part_pos.equals(type_2) && ho_ve.equals("v")) {
+			if (part_pos.equals(type_2) && ho_ve.equals("v") ) {
 				grille_cop[lgn-1][cln-1][0]= type_2;
 				grille_cop[lgn-1][cln-1][1]= crown_2;
-				grille_cop[lgn][cln-1][0]= type_1;
-				grille_cop[lgn][cln-1][1]= crown_1;
+				grille_cop[a_lgn-1][a_cln-1][0]= type_1;
+				grille_cop[a_lgn-1][a_cln-1][1]= crown_1;
 			}
 			
 				
 			}
 			catch(ArrayIndexOutOfBoundsException e){
-				System.out.println("Impossible de le placer");
+				System.out.println("Impossible de le placer 'index'");
 				if (part_pos.equals(type_1) && ho_ve.equals("h")){
 					grille_cop[lgn-1][cln-1][0]= "0";
 					grille_cop[lgn-1][cln-1][1]= "0";
-					grille_cop[lgn-1][cln][0]= "0";
-					grille_cop[lgn-1][cln][1]= "0";
+					grille_cop[a_lgn-1][a_cln-1][0]= "0";
+					grille_cop[a_lgn-1][a_cln-1][1]= "0";
 				}
 				
 				if (part_pos.equals(type_2) && ho_ve.equals("h")){
 					grille_cop[lgn-1][cln-1][0]= "0";
 					grille_cop[lgn-1][cln-1][1]= "0";
-					grille_cop[lgn-1][cln][0]= "0";
-					grille_cop[lgn-1][cln][1]= "0";
+					grille_cop[a_lgn-1][a_cln-1][0]= "0";
+					grille_cop[a_lgn-1][a_cln-1][1]= "0";
 				}
 				if (part_pos.equals(type_1) && ho_ve.equals("v")) {
 					grille_cop[lgn-1][cln-1][0]= "0";
 					grille_cop[lgn-1][cln-1][1]= "0";
-					grille_cop[lgn][cln-1][0]= "0";
-					grille_cop[lgn][cln-1][1]= "0";
+					grille_cop[a_lgn-1][a_cln-1][0]= "0";
+					grille_cop[a_lgn-1][a_cln-1][1]= "0";
 				}
 				if (part_pos.equals(type_2) && ho_ve.equals("v")) {
 					grille_cop[lgn-1][cln-1][0]= "0";
 					grille_cop[lgn-1][cln-1][1]= "0";
-					grille_cop[lgn][cln-1][0]= "0";
-					grille_cop[lgn][cln-1][1]= "0";
+					grille_cop[a_lgn-1][a_cln-1][0]= "0";
+					grille_cop[a_lgn-1][a_cln-1][1]= "0";
 				}
 				
 				
 			}
-//			System.out.println("retourner?");
-//			if (retourner.equals(oui)){
-//				
-//			}
+			
+			}
+			else {
+				System.out.println("impossible de placer 'check'");
+			}
+		}
+	while(placement_bon(lgn,cln,a_lgn,a_cln, grille, part_pos, part_autre)==false);
 		
 		return grille_cop;
 	}
@@ -181,10 +218,72 @@ public class Plateau {
 	}
 	
 	
-	public void verif(int lgn, int cln) {
-		
+	public static boolean pris(int ligne, int colonne, String[][][] grille) {
+		if (grille[ligne][colonne][0].equals("0")) {
+			return false;
+		}
+		else {
+			return true ;
+		}
 		
 	}
+	
+	public static boolean retourner(){
+		Scanner scan = new Scanner(System.in) ; 
+		String retourner = scan.nextLine();
+		if (retourner.equals("oui")){
+			return true;
+		}
+		if(retourner.equals("non")){
+			return false;
+		}
+		else {
+			return false;
+		}
+		
+	}
+	
+	
+	public static boolean placement_bon(int lgn, int cln, int a_lgn, int a_cln, String[][][] grille, String part_pos, String part_autre) {
+		if ( ((pris(lgn-1,cln-1,grille)==false) && (pris(a_lgn-1, a_cln-1, grille) == false) && (okautour(lgn-1,cln-1,grille, part_pos)==true))
+				|| ((pris(lgn-1,cln-1,grille)==false) && (pris(a_lgn-1, a_cln-1, grille) == false) && (okautour(a_lgn-1, a_cln-1, grille, part_autre) == true)) )  {
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
+	public static boolean okautour( int ligne, int colonne, String[][][] grille, String type_1) {
+		int ligne_h = ligne-1;
+		int ligne_b = ligne+1;
+		int colonne_g = colonne-1;
+		int colonne_d = colonne+1 ;
+		try{
+			if ((grille[ligne][colonne_g][0].equals(type_1))
+			|| (grille[ligne][colonne_d][0].equals(type_1))
+			|| (grille[ligne_h][colonne][0].equals(type_1))
+			|| (grille[ligne_b][colonne][0].equals(type_1))
+			|| (grille[ligne][colonne_g][0].equals("2"))
+			|| (grille[ligne][colonne_d][0].equals("2"))
+			|| (grille[ligne_h][colonne][0].equals("2"))
+			|| (grille[ligne_b][colonne][0].equals("2")) 
+//			|| (grille[colonne_g][ligne][0].equals(type_2))
+//			|| (grille[colonne_d][ligne][0].equals(type_2))
+//			|| (grille[colonne][ligne_h][0].equals(type_2))
+//			|| (grille[colonne][ligne_b][0].equals(type_2))
+			){
+				return true;
+			}
+		}
+		catch(ArrayIndexOutOfBoundsException e) {
+		System.out.println("autre coord");
+	}
+		return false;
+	}
+	
+
+	//static dominos.terrain
+	// non static dominos.getTerrain()
 	
 	public void compte_pts(ArrayList<ArrayList<String>> grille){
 //		for (int i=0; i<9 ; i++) {
