@@ -72,6 +72,7 @@ public class Plateau {
 		String crown_1 = Domino.get(0);
 		String type_2 = Domino.get(3);
 		String crown_2 = Domino.get(2);
+		
 		do{
 			System.out.println("pose horizontale (h) ou vertivale (v)");
 			ho_ve = scan.nextLine();
@@ -92,6 +93,7 @@ public class Plateau {
 		int cln ;
 		int a_lgn;
 		int a_cln;
+		Boolean trop_long = null;
 		do {
 			
 			System.out.println("coordonnées de la partie a poser");
@@ -105,10 +107,10 @@ public class Plateau {
 			//System.out.println(pris(lgn,cln,grille));
 		
 			System.out.println("retourner?");
-			
+			System.out.println("deuxieme partie en haut ou a gauche si oui");
 			boolean retourner = Plateau.retourner();
 			if ( ho_ve.equals("v") ) {
-				System.out.println("deuxieme partie en haut");
+				
 				if(retourner == true) {
 					a_lgn = lgn-1;
 					a_cln = cln;
@@ -120,7 +122,6 @@ public class Plateau {
 				
 			}
 			if ( ho_ve.equals("h")) {
-				System.out.println("deuxieme partie a gauche");
 				if(retourner == true){
 					a_lgn = lgn;
 					a_cln = cln-1;
@@ -163,6 +164,13 @@ public class Plateau {
 				grille_cop[a_lgn-1][a_cln-1][0]= type_1;
 				grille_cop[a_lgn-1][a_cln-1][1]= crown_1;
 			}
+			trop_long=troplong(grille_cop);
+			if (trop_long) {
+				grille_cop[lgn-1][cln-1][0]= "0";
+				grille_cop[lgn-1][cln-1][1]= "0";
+				grille_cop[a_lgn-1][a_cln-1][0]= "0";
+				grille_cop[a_lgn-1][a_cln-1][1]= "0";
+			}
 			
 				
 			}
@@ -202,7 +210,7 @@ public class Plateau {
 				System.out.println("impossible de placer 'check'");
 			}
 		}
-	while(placement_bon(lgn,cln,a_lgn,a_cln, grille, part_pos, part_autre)==false);
+	while(placement_bon(lgn,cln,a_lgn,a_cln, grille, part_pos, part_autre)==false || trop_long==true);
 		
 		return grille_cop;
 	}
@@ -241,6 +249,30 @@ public class Plateau {
 			return false;
 		}
 		
+	}
+	
+	public static boolean troplong(String[][][] grille) {
+		
+		for (int i=0 ; i<9; i++) {
+			int compteurl=0;
+			int compteurc=0;
+			for (int j=0; j<9; j++) {
+				if (grille[i][j][0].equals("0")==false) {
+					compteurl++;
+					//System.out.println("compteur lgl" + compteurl);
+				}
+				if(grille[j][i][0].equals("0")== false) {
+					compteurc++;
+					//System.out.println("compteur cln" + compteurc);
+				}
+				if (compteurc>5 ||compteurl >5) {
+					return true;
+				}
+			
+			}
+			
+		}
+		return false;
 	}
 	
 	
