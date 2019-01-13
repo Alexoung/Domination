@@ -318,7 +318,8 @@ public class Plateau {
 	//static dominos.terrain
 	// non static dominos.getTerrain()
 	
-	public static void compte_pts(String[][][] grille){
+	public static int[] compte_pts(String[][][] grille){
+		int[] scoreJoueur = new int[3];
 		ArrayList<ArrayList<ArrayList<Integer>>> indexParType = new ArrayList<ArrayList<ArrayList<Integer>>>(6);
 		String[] terrainType = {"Champs","Foret","Mer","Prairie","Mine","Montagne"};
 		for (int type=0; type<6 ; type++) {
@@ -336,8 +337,12 @@ public class Plateau {
 			}
 		}
 		int scoreTotal = 0;
+		int casesTotal = 0;
+		int couronnesTotal = 0;
 		for (int type=0; type<6 ; type++) {
 			int scoreType = 0;
+			int casesType = 0;
+			int couronnesType = 0;
 			ArrayList<ArrayList<Integer>> indexDuType = indexParType.get(type);
 			while (indexDuType.isEmpty() == false) {
 				boolean nouveauDomaine = false;
@@ -402,19 +407,27 @@ public class Plateau {
 							}
 						}
 					}
-					int nbCases = domaine.size();
-					int nbCouronnes = 0;
-					for (int i = 0 ; i<nbCases ; i++) {
-						nbCouronnes = nbCouronnes + domaine.get(i).get(2);
+					int casesDomaine = domaine.size();
+					int couronnesDomaine = 0;
+					for (int i = 0 ; i<casesDomaine ; i++) {
+						couronnesDomaine = couronnesDomaine + domaine.get(i).get(2);
 					}
-					scoreDomaine = nbCases * nbCouronnes;
+					scoreDomaine = casesDomaine * couronnesDomaine;
 					scoreType = scoreType + scoreDomaine;
+					casesType = casesType + casesDomaine;
+					couronnesType = couronnesType + couronnesDomaine;
 					nouveauDomaine = true;
 				}
 			}
 			scoreTotal = scoreTotal + scoreType;
+			casesTotal = casesTotal + casesType;
+			couronnesTotal = couronnesTotal + couronnesType;
 		}
+		scoreJoueur[0] = scoreTotal;
+		scoreJoueur[1] = casesTotal;
+		scoreJoueur[2] = couronnesTotal;
 		System.out.println("Le score total du joueur est " + scoreTotal + ".");
+		return scoreJoueur;
 	}
 		
 }
