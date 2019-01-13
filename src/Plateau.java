@@ -319,103 +319,102 @@ public class Plateau {
 	// non static dominos.getTerrain()
 	
 	public void compte_pts(String[][][] grille){
-//		ArrayList<ArrayList<ArrayList<Integer>>> indexParType = new ArrayList<ArrayList<ArrayList<Integer>>>(6);
-//		String[] terrainType = {"Champs","Foret","Mer","Prairie","Mine","Montagne"};
-//		for (int type=0; type<6 ; type++) {
-//			indexParType.add(new ArrayList<ArrayList<Integer>>());
-//			for (int lgn=0; lgn<9 ; lgn++) {
-//				for (int cln=0; cln<9 ; cln++) {
-//					if (grille[lgn][cln][0] == terrainType[type]) {
-//						ArrayList<Integer> coord = new ArrayList<Integer>(2);
-//						coord.add(lgn);
-//						coord.add(cln);
-//						coord.add(Integer.parseInt(grille[lgn][cln][1]));
-//						indexParType.get(type).add(coord);
-//					}
-//				}
-//			}
-//		}
-//		int scoreTotal = 0;
-//		for (int type=0; type<6 ; type++) {
-//			int scoreType = 0;
-//			ArrayList<ArrayList<Integer>> indexDuType = indexParType.get(type);
-//			while (indexDuType.isEmpty() == false) {
-//				boolean nouveauDomaine = false;
-//				while (nouveauDomaine == false) {
-//					int scoreDomaine = 0;
-//					ListIterator<ArrayList<Integer>> itrIDT = indexDuType.listIterator();
-//					ArrayList<ArrayList<Integer>> domaine = new ArrayList<ArrayList<Integer>>();
-//					ArrayList<ArrayList<Integer>> voisinsDomaine = new ArrayList<ArrayList<Integer>>();
-//					Iterator<ArrayList<Integer>> itrD = domaine.iterator();
-//					//Iterator<ArrayList<Integer>> itrVD = voisinsDomaine.iterator();
-//					if (domaine.isEmpty()) {
-//						domaine.add(indexParType.get(type).get(0));
-//						indexParType.get(type).remove(0);
-//						ArrayList<Integer> indexVoisinInit = new ArrayList<Integer>();
-//						indexVoisinInit.add(domaine.get(0).get(0)-1);
-//						indexVoisinInit.add(domaine.get(0).get(1));
-//						voisinsDomaine.add(indexVoisinInit);
-//						indexVoisinInit.clear();
-//						indexVoisinInit.add(domaine.get(0).get(0));
-//						indexVoisinInit.add(domaine.get(0).get(1)-1);
-//						voisinsDomaine.add(indexVoisinInit);
-//						indexVoisinInit.clear();
-//						indexVoisinInit.add(domaine.get(0).get(0)+1);
-//						indexVoisinInit.add(domaine.get(0).get(1));
-//						voisinsDomaine.add(indexVoisinInit);
-//						indexVoisinInit.clear();
-//						indexVoisinInit.add(domaine.get(0).get(0));
-//						indexVoisinInit.add(domaine.get(0).get(1)+1);
-//						voisinsDomaine.add(indexVoisinInit);
-//					}
-//					boolean indexAdded = true;
-//					while (indexAdded == true) {
-//						indexAdded = false;
-//						while (itrIDT.hasNext()) {
-//							int indexItr = itrIDT.nextIndex();
-//							ArrayList<Integer> currentIDT = itrIDT.next();
-//							ListIterator<ArrayList<Integer>> itrVD = voisinsDomaine.listIterator();
-//							while (itrVD.hasNext()) {
-//								ArrayList<Integer> currentVD = itrVD.next();
-//								if (currentIDT.get(0) == currentVD.get(0) && currentIDT.get(1) == currentVD.get(1)) {
-//									domaine.add(currentIDT);
-//									indexAdded = true;
-//									indexDuType.remove(indexItr);
-//									ArrayList<Integer> indexVoisin = new ArrayList<Integer>();
-//									indexVoisin.add(domaine.get(0).get(0)-1);
-//									indexVoisin.add(domaine.get(0).get(1));
-//									itrVD.add(indexVoisin);
-//									indexVoisin.clear();
-//									indexVoisin.add(domaine.get(0).get(0));
-//									indexVoisin.add(domaine.get(0).get(1)-1);
-//									itrVD.add(indexVoisin);
-//									indexVoisin.clear();
-//									indexVoisin.add(domaine.get(0).get(0)+1);
-//									indexVoisin.add(domaine.get(0).get(1));
-//									itrVD.add(indexVoisin);
-//									indexVoisin.clear();
-//									indexVoisin.add(domaine.get(0).get(0));
-//									indexVoisin.add(domaine.get(0).get(1)+1);
-//									itrVD.add(indexVoisin);
-//									itrIDT = indexDuType.listIterator();
-//									break;
-//								}
-//							}
-//						}
-//					}
-//					int nbCases = domaine.size();
-//					int nbCouronnes = 0;
-//					for (int i = 0 ; i<nbCases ; i++) {
-//						nbCouronnes = nbCouronnes + domaine.get(i).get(2);
-//					}
-//					scoreDomaine = nbCases * nbCouronnes;
-//					scoreType = scoreType + scoreDomaine;
-//					nouveauDomaine = true;
-//				}
-//			}
-//			scoreTotal = scoreTotal + scoreType;
-//		}
-//		System.out.println("Le score total du joueur est " + scoreTotal + ".");
+		ArrayList<ArrayList<ArrayList<Integer>>> indexParType = new ArrayList<ArrayList<ArrayList<Integer>>>(6);
+		String[] terrainType = {"Champs","Foret","Mer","Prairie","Mine","Montagne"};
+		for (int type=0; type<6 ; type++) {
+			indexParType.add(new ArrayList<ArrayList<Integer>>());
+			for (int lgn=0; lgn<9 ; lgn++) {
+				for (int cln=0; cln<9 ; cln++) {
+					if (grille[lgn][cln][0] == terrainType[type]) {
+						ArrayList<Integer> coord = new ArrayList<Integer>(2);
+						coord.add(lgn);
+						coord.add(cln);
+						coord.add(Integer.parseInt(grille[lgn][cln][1]));
+						indexParType.get(type).add(coord);
+					}
+				}
+			}
+		}
+		int scoreTotal = 0;
+		for (int type=0; type<6 ; type++) {
+			int scoreType = 0;
+			ArrayList<ArrayList<Integer>> indexDuType = indexParType.get(type);
+			while (indexDuType.isEmpty() == false) {
+				boolean nouveauDomaine = false;
+				while (nouveauDomaine == false) {
+					int scoreDomaine = 0;
+					ArrayList<ArrayList<Integer>> domaine = new ArrayList<ArrayList<Integer>>();
+					ArrayList<ArrayList<Integer>> voisinsDomaine = new ArrayList<ArrayList<Integer>>();
+					if (domaine.isEmpty()) {
+						domaine.add(indexParType.get(type).get(0));
+						indexDuType.remove(0);
+						ArrayList<Integer> indexVoisinInitH = new ArrayList<Integer>();
+						indexVoisinInitH.add(domaine.get(0).get(0)-1);
+						indexVoisinInitH.add(domaine.get(0).get(1));
+						voisinsDomaine.add(indexVoisinInitH);
+						ArrayList<Integer> indexVoisinInitG = new ArrayList<Integer>();
+						indexVoisinInitG.add(domaine.get(0).get(0));
+						indexVoisinInitG.add(domaine.get(0).get(1)-1);
+						voisinsDomaine.add(indexVoisinInitG);
+						ArrayList<Integer> indexVoisinInitB = new ArrayList<Integer>();
+						indexVoisinInitB.add(domaine.get(0).get(0)+1);
+						indexVoisinInitB.add(domaine.get(0).get(1));
+						voisinsDomaine.add(indexVoisinInitB);
+						ArrayList<Integer> indexVoisinInitD = new ArrayList<Integer>();
+						indexVoisinInitD.add(domaine.get(0).get(0));
+						indexVoisinInitD.add(domaine.get(0).get(1)+1);
+						voisinsDomaine.add(indexVoisinInitD);
+					}
+					boolean indexAdded = true;
+					while (indexAdded == true) {
+						indexAdded = false;
+						for (int i=0; i<indexDuType.size(); i++) {
+							boolean reinit = false;
+							ListIterator<ArrayList<Integer>> itrVD = voisinsDomaine.listIterator();
+							while (itrVD.hasNext()) {
+								ArrayList<Integer> currentVD = itrVD.next();
+								if ((indexDuType.get(i).get(0) == currentVD.get(0)) && (indexDuType.get(i).get(1) == currentVD.get(1))) {
+									domaine.add(indexDuType.get(i));
+									indexAdded = true;
+									indexDuType.remove(i);
+									ArrayList<Integer> indexVoisinH = new ArrayList<Integer>();
+									indexVoisinH.add(domaine.get(domaine.size()-1).get(0)-1);
+									indexVoisinH.add(domaine.get(domaine.size()-1).get(1));
+									itrVD.add(indexVoisinH);
+									ArrayList<Integer> indexVoisinG = new ArrayList<Integer>();
+									indexVoisinG.add(domaine.get(domaine.size()-1).get(0));
+									indexVoisinG.add(domaine.get(domaine.size()-1).get(1)-1);
+									itrVD.add(indexVoisinG);
+									ArrayList<Integer> indexVoisinB = new ArrayList<Integer>();
+									indexVoisinB.add(domaine.get(domaine.size()-1).get(0)+1);
+									indexVoisinB.add(domaine.get(domaine.size()-1).get(1));
+									itrVD.add(indexVoisinB);
+									ArrayList<Integer> indexVoisinD = new ArrayList<Integer>();
+									indexVoisinD.add(domaine.get(domaine.size()-1).get(0));
+									indexVoisinD.add(domaine.get(domaine.size()-1).get(1)+1);
+									itrVD.add(indexVoisinD);
+									reinit = true;
+									break;
+								}
+							}
+							if (reinit == true) {
+								i = 0;
+							}
+						}
+					}
+					int nbCases = domaine.size();
+					int nbCouronnes = 0;
+					for (int i = 0 ; i<nbCases ; i++) {
+						nbCouronnes = nbCouronnes + domaine.get(i).get(2);
+					}
+					scoreDomaine = nbCases * nbCouronnes;
+					scoreType = scoreType + scoreDomaine;
+					nouveauDomaine = true;
+				}
+			}
+			scoreTotal = scoreTotal + scoreType;
+		}
+		System.out.println("Le score total du joueur est " + scoreTotal + ".");
 	}
 		
 }
