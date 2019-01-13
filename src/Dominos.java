@@ -29,86 +29,105 @@ public class Dominos {
 	//		
 	//	}
 
-	public static void main(String[] args){ 
 
-//		ArrayList<ArrayList<String>> allist = new ArrayList<ArrayList<String>>();
-//
-//		//String[][] list = new String[50][5];
-//		//int ligne = 0;
-//		try {
-//
-//			Scanner scanner = new Scanner(new File("dominos.csv"));
-//			while (scanner.hasNext()) {
-//				String line = scanner.nextLine();
-//				String[] elements = line.split(",");
-//				ArrayList<String> currentdom = new ArrayList<String>();
-//				for (int i=0; i<elements.length; i++) {
-//					currentdom.add(elements[i]);
-//				}
-//				allist.add(currentdom);
-////				ligne+=1;
-////				for (int i =0; i<elements.length; i++) {
-////					list[ligne][i]= elements[i];
-////					ligne+= 1;
-////				}	
-//
-//			}
-//			System.out.println(allist.get(1).get(3));
-//			//System.out.println(list[2][1]);
-//
-//		} 
-//		catch (FileNotFoundException e) {
-//			System.out.println("Fichier non trouvé");
-//		}
+	
+	public static ArrayList<ArrayList<String>> importation() {
+		ArrayList<ArrayList<String>> allist = new ArrayList<ArrayList<String>>();
+		try {
+
+			Scanner scanner = new Scanner(new File("dominos.csv"));
+			while (scanner.hasNext()) {
+				String line = scanner.nextLine();
+				String[] elements = line.split(",");
+				ArrayList<String> currentdom = new ArrayList<String>();
+				for (int i=0; i<elements.length; i++) {
+					currentdom.add(elements[i]);
+				}
+				allist.add(currentdom);
+
+			}
+			//System.out.println(allist.get(1).get(3));
+			//System.out.println(list[2][1]);
+
+		} 
+		catch (FileNotFoundException e) {
+			System.out.println("Fichier non trouvé");
+		}
+		
+		return allist;
+	
 	}
 	
 	
 	
-	
-	Stack<Integer> pioche = new Stack<Integer>();
-//	{
-//	for (int i=0;i<49 ; i++) {
-//		int num = (int)Math.random()*49;
-//	}
-//	
-//	}
-	
 	public static void melange(Stack<Integer> pioche) {
 		while(pioche.size()!=48) {
-			//Random num = new Random();
-			int num = (int)(Math.random()*49);
+			Random rand = new Random();
+			//int num = (int)(Math.random()*49);
+			int num = rand.nextInt(49);
 			//System.out.println(num);
 			if (pioche.search(num)==-1) {
 				pioche.push(num);
 			}
 		}
+		System.out.println(pioche);
 		
 	}
 	
-	public static ArrayList<Integer> piocher(int nombre, Stack<Integer> pioche, ArrayList<ArrayList<String>> allist) {
+	public static ArrayList<Integer> piocher(int nbj, Stack<Integer> pioche, ArrayList<ArrayList<String>> allist) {
+		
 		ArrayList<Integer> tb_num_pioche = new ArrayList<Integer>();
-		for (int i=0;  i<nombre; i++) {
-			int n = pioche.pop();
-			//System.out.println(n);
-			tb_num_pioche.add(n+1);
-			//System.out.println(allist.get(n+1));
-				
+		if (nbj == 2) {
+			System.out.println("hello");
+			for (int i=0;  i<4; i++) {
+				int n = pioche.pop();
+				System.out.println(n);
+				//System.out.println(n);
+				tb_num_pioche.add(n+1);
+			}
 		}
-		return tb_num_pioche;
+		else {
+			for (int i=0;  i<nbj; i++) {
+				int n = pioche.pop();
+				//System.out.println(n);
+				tb_num_pioche.add(n+1);
+		}
+		
+		//System.out.println(allist.get(n+1));
+			
+		}
+		Collections.sort(tb_num_pioche);
+		return tb_num_pioche; // DOMINOS MIS A DISPOSITION APRES PIOCHE
 	}
 	
-	public static int selection(ArrayList<Integer> nbpioche) {
-
+	public static void setup_retirer(int nbj, Stack<Integer> pioche) {
+		int a_enlever = 12*(4-nbj);
+		
+		for (int i = 0; i<a_enlever ; i++) {
+			pioche.pop();
+		}
+		System.out.println(a_enlever + " dominos ont été retirés");
+	}
+	
+	public static int[] selection(ArrayList<Integer> nbpioche) {
+		
 		Scanner scan = new Scanner(System.in);
 		int select;
+		int indexselect;
+		int[] tb= new int[2];
 		do{
 			System.out.println("Donner le numero du domino que vous voulez prendre");
 			select = scan.nextInt();
 		}
 		while(nbpioche.contains(select)!=true);
+		indexselect = nbpioche.indexOf(select);
 		nbpioche.remove(new Integer (select));
+		//nbpioche.set(indexselect, null);
 		
-		return select;
+		System.out.println(indexselect);
+		tb[0]=select;
+		tb[1]= indexselect;
+		return tb;
 	}
 
 

@@ -54,11 +54,11 @@ public class Joueur {
 	}
 
 	
-	public static Joueur nvjoueur(ArrayList<String> list, int njoueur){
+	public static Joueur nvjoueur(ArrayList<String> list, int nbj){
 		Scanner scan = new Scanner(System.in);
 		String couleur;
 		//int[][][] grille;
-		System.out.println("NOM du joueur "+ (njoueur+1));
+		System.out.println("NOM du joueur "+ (nbj+1));
 		String nom = scan.nextLine();
 			do {
 			System.out.println("Couleur : ");

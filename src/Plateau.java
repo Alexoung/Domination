@@ -18,15 +18,25 @@ public class Plateau {
 		System.out.print("\n");
 		System.out.print("  ");
 		for (int a=0 ; a<9 ; a++) {
+			String chaine = "";
+			while (chaine.length()<12) {
+				chaine = " "+(chaine);
+			}
+			System.out.print(chaine);//6espaces
 			System.out.print(a+1);
 			
-		}System.out.print("\n");
+		}
+		System.out.println("\n");
 		for (int i=0 ; i<9 ; i++) {
 			System.out.print((i+1));
 			System.out.print(" ");
 			for (int j=0; j<9 ; j++) {
+				String chaine = list[i][j][0];
+				while (chaine.length()<13) {
+					chaine = " "+(chaine);
+				}
 			
-			System.out.print((list[i][j][0]));
+			System.out.print(chaine);
 				if (j==8) {
 					System.out.print("\n");
 				}
@@ -300,10 +310,6 @@ public class Plateau {
 			|| (grille[ligne][colonne_d][0].equals("2"))
 			|| (grille[ligne_h][colonne][0].equals("2"))
 			|| (grille[ligne_b][colonne][0].equals("2")) 
-//			|| (grille[colonne_g][ligne][0].equals(type_2))
-//			|| (grille[colonne_d][ligne][0].equals(type_2))
-//			|| (grille[colonne][ligne_h][0].equals(type_2))
-//			|| (grille[colonne][ligne_b][0].equals(type_2))
 			){
 				return true;
 			}
@@ -314,9 +320,6 @@ public class Plateau {
 		return false;
 	}
 	
-
-	//static dominos.terrain
-	// non static dominos.getTerrain()
 	
 	public static int[] compte_pts(String[][][] grille){
 		int[] scoreJoueur = new int[3];
@@ -429,5 +432,5 @@ public class Plateau {
 		System.out.println("Le score total du joueur est " + scoreTotal + ".");
 		return scoreJoueur;
 	}
-		
+
 }
