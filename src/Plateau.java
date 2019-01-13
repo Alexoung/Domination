@@ -318,7 +318,7 @@ public class Plateau {
 	//static dominos.terrain
 	// non static dominos.getTerrain()
 	
-	public void compte_pts(String[][][] grille){
+	public static void compte_pts(String[][][] grille){
 		ArrayList<ArrayList<ArrayList<Integer>>> indexParType = new ArrayList<ArrayList<ArrayList<Integer>>>(6);
 		String[] terrainType = {"Champs","Foret","Mer","Prairie","Mine","Montagne"};
 		for (int type=0; type<6 ; type++) {
