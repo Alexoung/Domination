@@ -1,18 +1,10 @@
 import java.util.ArrayList;
-import java.util.Iterator;
+//import java.util.Iterator;
 import java.util.ListIterator;
 import java.util.Scanner;
 
 public class Plateau {
-	int nb_couronnes;
-	int nb_champs;
-	int nb_prairie;
-	int nb_mer;
-	int nb_foret;
-	int nb_mine;
-	
-	
-	
+		
 	public static void afficher(String[][][] list) {
 		System.out.print("Terrain");
 		System.out.print("\n");
@@ -320,6 +312,24 @@ public class Plateau {
 		return false;
 	}
 	
+	public static void calcul_voisins(ArrayList<ArrayList<Integer>> domaine, ArrayList<ArrayList<Integer>> voisinsDomaine, int i) {
+		ArrayList<Integer> indexVoisinH = new ArrayList<Integer>();
+		indexVoisinH.add(domaine.get(i).get(0)-1);
+		indexVoisinH.add(domaine.get(i).get(1));
+		voisinsDomaine.add(indexVoisinH);
+		ArrayList<Integer> indexVoisinG = new ArrayList<Integer>();
+		indexVoisinG.add(domaine.get(i).get(0));
+		indexVoisinG.add(domaine.get(i).get(1)-1);
+		voisinsDomaine.add(indexVoisinG);
+		ArrayList<Integer> indexVoisinB = new ArrayList<Integer>();
+		indexVoisinB.add(domaine.get(i).get(0)+1);
+		indexVoisinB.add(domaine.get(i).get(1));
+		voisinsDomaine.add(indexVoisinB);
+		ArrayList<Integer> indexVoisinD = new ArrayList<Integer>();
+		indexVoisinD.add(domaine.get(i).get(0));
+		indexVoisinD.add(domaine.get(i).get(1)+1);
+		voisinsDomaine.add(indexVoisinD);
+	}
 	
 	public static int[] compte_pts(String[][][] grille){
 		int[] scoreJoueur = new int[3];
@@ -356,22 +366,7 @@ public class Plateau {
 					if (domaine.isEmpty()) {
 						domaine.add(indexParType.get(type).get(0));
 						indexDuType.remove(0);
-						ArrayList<Integer> indexVoisinInitH = new ArrayList<Integer>();
-						indexVoisinInitH.add(domaine.get(0).get(0)-1);
-						indexVoisinInitH.add(domaine.get(0).get(1));
-						voisinsDomaine.add(indexVoisinInitH);
-						ArrayList<Integer> indexVoisinInitG = new ArrayList<Integer>();
-						indexVoisinInitG.add(domaine.get(0).get(0));
-						indexVoisinInitG.add(domaine.get(0).get(1)-1);
-						voisinsDomaine.add(indexVoisinInitG);
-						ArrayList<Integer> indexVoisinInitB = new ArrayList<Integer>();
-						indexVoisinInitB.add(domaine.get(0).get(0)+1);
-						indexVoisinInitB.add(domaine.get(0).get(1));
-						voisinsDomaine.add(indexVoisinInitB);
-						ArrayList<Integer> indexVoisinInitD = new ArrayList<Integer>();
-						indexVoisinInitD.add(domaine.get(0).get(0));
-						indexVoisinInitD.add(domaine.get(0).get(1)+1);
-						voisinsDomaine.add(indexVoisinInitD);
+						calcul_voisins(domaine, voisinsDomaine, 0);
 					}
 					boolean indexAdded = true;
 					while (indexAdded == true) {
@@ -385,22 +380,7 @@ public class Plateau {
 									domaine.add(indexDuType.get(i));
 									indexAdded = true;
 									indexDuType.remove(i);
-									ArrayList<Integer> indexVoisinH = new ArrayList<Integer>();
-									indexVoisinH.add(domaine.get(domaine.size()-1).get(0)-1);
-									indexVoisinH.add(domaine.get(domaine.size()-1).get(1));
-									itrVD.add(indexVoisinH);
-									ArrayList<Integer> indexVoisinG = new ArrayList<Integer>();
-									indexVoisinG.add(domaine.get(domaine.size()-1).get(0));
-									indexVoisinG.add(domaine.get(domaine.size()-1).get(1)-1);
-									itrVD.add(indexVoisinG);
-									ArrayList<Integer> indexVoisinB = new ArrayList<Integer>();
-									indexVoisinB.add(domaine.get(domaine.size()-1).get(0)+1);
-									indexVoisinB.add(domaine.get(domaine.size()-1).get(1));
-									itrVD.add(indexVoisinB);
-									ArrayList<Integer> indexVoisinD = new ArrayList<Integer>();
-									indexVoisinD.add(domaine.get(domaine.size()-1).get(0));
-									indexVoisinD.add(domaine.get(domaine.size()-1).get(1)+1);
-									itrVD.add(indexVoisinD);
+									calcul_voisins(domaine, voisinsDomaine, domaine.size()-1);
 									reinit = true;
 									break;
 								}
