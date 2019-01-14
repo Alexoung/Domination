@@ -139,16 +139,79 @@ public class Main {
 			}
 			while(pioche.empty()==false);
 			
-			//FIN DE JEU
-			for(int i = 0; i<nbj; i++)
-			Plateau.compte_pts(ljoueurs[i].getGrille());
+			//FIN DE JEU - Calcul des scores et determination du gagnant
+			int [][] scoresJoueurs = new int[nbj][3];
+			for(int i = 0; i<nbj; i++) {
+				int[] scoreJoueur = Plateau.compte_pts(ljoueurs[i].getGrille());
+				scoresJoueurs[i] = scoreJoueur;
+			}
+			int scoreMax = 0; int casesMax = 0; int couronnesMax = 0;
+			int vainqueurScore = 0; int vainqueurCases = 0; int vainqueurCouronnes = 0;
+			boolean egaliteScore = false; boolean egaliteCases = false; boolean egaliteCouronnes = false;
+			for (int j = 0; j<nbj; j++) {
+				if (scoresJoueurs[j][0] > scoreMax) {
+					scoreMax = scoresJoueurs[j][0];
+					vainqueurScore = j;
+				}
+				if (scoresJoueurs[j][1] > casesMax) {
+					casesMax = scoresJoueurs[j][1];
+					vainqueurCases = j;
+				}
+				if (scoresJoueurs[j][2] > couronnesMax) {
+					couronnesMax = scoresJoueurs[j][2];
+					vainqueurCouronnes = j;
+				}
+			}
+			for (int k = 0; k<nbj; k++) {
+				for (int m = 0; m<nbj; m++) {
+					if (k != m) {	
+						if (scoresJoueurs[k][0] == scoresJoueurs[m][0]) {
+							if (scoresJoueurs[k][0] == scoreMax) {
+								egaliteScore = true;
+							}
+						}
+					}
+				}
+			}
+			if (egaliteScore == false) {
+				System.out.println("Le joueur " + (vainqueurScore+1) + " a gagné. Félicitations !");
+			}
+			if (egaliteScore) {
+				for (int k = 0; k<nbj; k++) {
+					for (int m = 0; m<nbj; m++) {
+						if (k != m) {	
+							if (scoresJoueurs[k][1] == scoresJoueurs[m][1]) {
+								if (scoresJoueurs[k][1] == casesMax) {
+									egaliteCases = true;
+								}
+							}
+						}
+					}
+				}
+				if (egaliteCases == false) {
+					System.out.println("Le joueur " + (vainqueurCases+1) + " a gagné. Félicitations !");
+				}
+				if (egaliteCases) {
+					for (int k = 0; k<nbj; k++) {
+						for (int m = 0; m<nbj; m++) {
+							if (k != m) {	
+								if (scoresJoueurs[k][2] == scoresJoueurs[m][2]) {
+									if (scoresJoueurs[k][2] == couronnesMax) {
+										egaliteCouronnes = true;
+									}
+								}
+							}
+						}
+					}
+					if (egaliteCouronnes == false) {
+						System.out.println("Le joueur " + (vainqueurCouronnes+1) + " a gagné. Félicitations !");
+					}
+					if (egaliteCouronnes) {
+						System.out.println("Il est impossible de départager les joueurs. Ils sont donc tous désignés victorieux. Félicitations !");
+					}
+				}
+			}
 			
-			
-			
-
-
-		
-		
 			
 	}
 	public static void set_jeu() {
