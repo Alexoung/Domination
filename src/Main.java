@@ -76,7 +76,8 @@ public class Main {
 //			}
 			Tour tourp= new Tour(debut_order, debut_order);
 			do {
-				tourp.setCurrent_order(tourp.getNext_order());
+				ArrayList<Integer> ordre_tour = new ArrayList<Integer>(tourp.getNext_order());
+				tourp.setCurrent_order(ordre_tour);
 			ArrayList<Integer> currentpioche = Dominos.piocher(nbj, pioche, allist);
 			ArrayList<Integer> pioche_complete = new ArrayList<Integer>();
 			for (int a : currentpioche) {
@@ -84,7 +85,10 @@ public class Main {
 			}
 			//System.out.println(tourp.getCurrent_order());
 			while (currentpioche.isEmpty()==false) {
+				
 				System.out.println("\n"+"Dominos disponibles" + "\n");
+				System.out.println("current " + current_order);
+				System.out.println("next " + next_order);
 				System.out.println(allist.get(0));
 				Iterator<Integer> iterator= currentpioche.iterator();
 				while(iterator.hasNext()) {
@@ -101,9 +105,9 @@ public class Main {
 				tourp.getCurrent_order().remove(0);
 				
 
-				System.out.println("\n" + "Tour de "+ ljoueurs[vajouer].getName() + " en " +ljoueurs[vajouer].getColor());
+				System.out.println("\n" + ">>> Tour de "+ ljoueurs[vajouer].getName() + " en " +ljoueurs[vajouer].getColor());
 				System.out.println("Grille de " + ljoueurs[vajouer].getName());
-				String[][][] grille_init = ljoueurs[vajouer].grille;
+				String[][][] grille_init = ljoueurs[vajouer].getGrille();
 				Plateau.afficher(grille_init);
 				
 				
@@ -119,13 +123,13 @@ public class Main {
 				do{
 					System.out.println("Domino à placer");
 					System.out.println(allist.get(select) + "\n");
-					Plateau.afficher(ljoueurs[vajouer].grille);
-					grille_suivante = Plateau.poser(allist.get(select), ljoueurs[vajouer].grille);
+					Plateau.afficher(ljoueurs[vajouer].getGrille());
+					grille_suivante = Plateau.poser(allist.get(select), ljoueurs[vajouer].getGrille());
 					Plateau.afficher(grille_suivante);
 					//conf = Plateau.confirmation();
 					}//MANQUE CONFIRMATION ET ANNULATION DE LA DISPOSITION SI NON CONFIRMEE
 				while(Plateau.confirmation().equals("oui")==false);
-				ljoueurs[vajouer].grille=grille_suivante;
+				ljoueurs[vajouer].setGrille(grille_suivante);
 				
 				tourp.setNext_order(next_order);
 				
@@ -134,6 +138,12 @@ public class Main {
 			}
 			}
 			while(pioche.empty()==false);
+			
+			//FIN DE JEU
+			for(int i = 0; i<nbj; i++)
+			Plateau.compte_pts(ljoueurs[i].getGrille());
+			
+			
 			
 
 
