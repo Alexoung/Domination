@@ -124,7 +124,7 @@ public class Dominos {
 		nbpioche.remove(new Integer (select));
 		//nbpioche.set(indexselect, null);
 		
-		System.out.println(indexselect);
+		//System.out.println(indexselect);
 		tb[0]=select;
 		tb[1]= indexselect;
 		return tb;
