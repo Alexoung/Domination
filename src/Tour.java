@@ -5,10 +5,12 @@ import java.util.Stack;
 public class Tour {
 	ArrayList<Integer> current_order;
 	ArrayList<Integer> next_order;
+	ArrayList<Integer> last_pioche;
 	
-	public Tour(ArrayList<Integer> current_order, ArrayList<Integer> next_order) {
+	public Tour(ArrayList<Integer> current_order, ArrayList<Integer> next_order, ArrayList<Integer> last_pioche) {
 		this.current_order = current_order;
 		this.next_order = next_order;
+		this.last_pioche = last_pioche;
 	}
 
 	public ArrayList<Integer> getCurrent_order() {
@@ -27,7 +29,14 @@ public class Tour {
 		this.next_order = next_order;
 	}
 
-	
+	public ArrayList<Integer> getLast_pioche() {
+		return last_pioche;
+	}
+
+	public void setLast_pioche(ArrayList<Integer> last_pioche) {
+		this.last_pioche = last_pioche;
+	}
+
 	public static ArrayList<Integer> ordre_debut(int nbj){
 		ArrayList<Integer> ordre = new ArrayList<Integer>();
 		Random rand = new Random();

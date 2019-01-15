@@ -23,7 +23,7 @@ public class Plateau {
 			System.out.print((i+1));
 			System.out.print(" ");
 			for (int j=0; j<9 ; j++) {
-				String chaine = list[i][j][0];
+				String chaine = list[i][j][0] +","+ list[i][j][1];
 				while (chaine.length()<13) {
 					chaine = " "+(chaine);
 				}
