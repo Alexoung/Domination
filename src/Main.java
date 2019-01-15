@@ -10,6 +10,7 @@ public class Main {
 
 	public static void main(String[] args) {
 		//IMPORATATION DE LA LISTE CSV
+		
 		ArrayList<ArrayList<String>> allist = Dominos.importation();
 
 
@@ -26,9 +27,10 @@ public class Main {
 		int nbj;
 
 
-		System.out.println("Nombre de joueurs?");
+		do{System.out.println("Nombre de joueurs?");
 		Scanner scan = new Scanner(System.in);
-		nbj = scan.nextInt();
+		nbj = scan.nextInt();}
+		while(nbj>4);
 		Joueur[] ljoueurs = new Joueur[nbj];
 		ArrayList<String> dispcouleur = new ArrayList<String>();
 		dispcouleur.add("bleu");
@@ -39,8 +41,14 @@ public class Main {
 
 		for (int i=0 ; i<nbj ; i++) {
 			ljoueurs[i] = Joueur.nvjoueur(dispcouleur, i);
+
+			//ljoueurs[i].getFen().colorier(ljoueurs[i].getFen().getListbutton()[2][4]);
 			//System.out.println(n);
 		}
+
+		
+		
+		
 
 
 
@@ -94,9 +102,10 @@ public class Main {
 			tourp.setCurrent_order(ordre_tour);
 			ArrayList<Integer> currentpioche = Dominos.piocher(nbj, grd_pioche, allist);
 			ArrayList<Integer> pioche_complete = new ArrayList<Integer>(currentpioche);
+			int classement =0;
 
 			while(currentpioche.isEmpty()==false) {
-				int classement =0;
+				
 
 
 				int vajouer=tourp.getCurrent_order().get(0);
@@ -113,7 +122,9 @@ public class Main {
 					//conf = Plateau.confirmation();
 				}//MANQUE CONFIRMATION ET ANNULATION DE LA DISPOSITION SI NON CONFIRMEE
 				while(Plateau.confirmation().equals("oui")==false);
+				
 				ljoueurs[vajouer].setGrille(grille_suivante);
+				ljoueurs[vajouer].getFen().color_fenetre(ljoueurs[vajouer]);
 
 				System.out.println("Grille de " + ljoueurs[vajouer].getName());
 				String[][][] grille_init = ljoueurs[vajouer].getGrille();
@@ -141,7 +152,8 @@ public class Main {
 
 
 				tourp.setNext_order(next_order);
-				tourp.setLast_pioche(pioche_complete);
+				classement++;
+				
 				if(grd_pioche.empty()) {
 					System.out.println("\n" + ">>> Tour de "+ ljoueurs[vajouer].getName() + " en " +ljoueurs[vajouer].getColor());
 					do{
@@ -152,10 +164,13 @@ public class Main {
 						Plateau.afficher(grille_suivante);
 					}//MANQUE CONFIRMATION ET ANNULATION DE LA DISPOSITION SI NON CONFIRMEE
 					while(Plateau.confirmation().equals("oui")==false);
+					ljoueurs[vajouer].getFen().color_fenetre(ljoueurs[vajouer]);
 					ljoueurs[vajouer].setGrille(grille_suivante);
+					
 				}
-
+			
 			}
+			tourp.setLast_pioche(pioche_complete);
 
 		}while(grd_pioche.empty()==false);
 

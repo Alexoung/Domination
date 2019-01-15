@@ -58,6 +58,7 @@ public class Plateau {
 		
 	
 	public static String[][][] poser (ArrayList<String> Domino, String[][][] grille) {
+		
 		String[][][] grille_cop= new String[9][9][2];
 		for (int i=0; i<9 ; i++) {
 			for (int j=0; j<9 ;j++) {
@@ -75,6 +76,13 @@ public class Plateau {
 		String crown_1 = Domino.get(0);
 		String type_2 = Domino.get(3);
 		String crown_2 = Domino.get(2);
+		
+		System.out.println("DEFAUSSER LE DOMINO ?");
+		String defausser = scan.nextLine();
+		if (defausser.equals("oui")) {
+			return grille;
+		
+		}
 		
 		do{
 			System.out.println("pose horizontale (h) ou vertivale (v)");
@@ -211,9 +219,11 @@ public class Plateau {
 			}
 			else {
 				System.out.println("impossible de placer 'check'");
+				
 			}
+			
 		}
-	while(placement_bon(lgn,cln,a_lgn,a_cln, grille, part_pos, part_autre)==false || trop_long==true);
+	while(placement_bon(lgn,cln,a_lgn,a_cln, grille, part_pos, part_autre)==false || trop_long==true );
 		
 		return grille_cop;
 	}

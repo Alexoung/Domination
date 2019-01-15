@@ -7,14 +7,28 @@ public class Joueur {
 	String name ;
 	String color;
 	String[][][] grille;
+	Fenetre fen;
 	
 	
 	
-	public Joueur (String name, String color, String[][][] grille) {
+	public Joueur (String name, String color, String[][][] grille, Fenetre fen) {
 		this.name = name;
 		this.color = color;
 		this.grille = grille;
+		this.fen = fen;
 		
+	}
+
+
+
+	public Fenetre getFen() {
+		return fen;
+	}
+
+
+
+	public void setFen(Fenetre fen) {
+		this.fen = fen;
 	}
 
 
@@ -77,8 +91,9 @@ public class Joueur {
 		}
 		grille[4][4][0]= "Chateau";
 		list.remove(new String(couleur));
+		Fenetre fen = new Fenetre(nom);
 		
-		return new Joueur(nom, couleur, grille);
+		return new Joueur(nom, couleur, grille, fen );
 		
 	}
 
