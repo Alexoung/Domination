@@ -298,10 +298,10 @@ public class Plateau {
 			|| (grille[ligne][colonne_d][0].equals(type_1))
 			|| (grille[ligne_h][colonne][0].equals(type_1))
 			|| (grille[ligne_b][colonne][0].equals(type_1))
-			|| (grille[ligne][colonne_g][0].equals("2"))
-			|| (grille[ligne][colonne_d][0].equals("2"))
-			|| (grille[ligne_h][colonne][0].equals("2"))
-			|| (grille[ligne_b][colonne][0].equals("2")) 
+			|| (grille[ligne][colonne_g][0].equals("Chateau"))
+			|| (grille[ligne][colonne_d][0].equals("Chateau"))
+			|| (grille[ligne_h][colonne][0].equals("Chateau"))
+			|| (grille[ligne_b][colonne][0].equals("Chateau")) 
 			){
 				return true;
 			}
