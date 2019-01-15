@@ -82,18 +82,16 @@ public class Dominos {
 			for (int i=0;  i<4; i++) {
 				int n = pioche.pop();
 				System.out.println(n);
-				//System.out.println(n);
+				
 				tb_num_pioche.add(n+1);
 			}
 		}
 		else {
 			for (int i=0;  i<nbj; i++) {
 				int n = pioche.pop();
-				//System.out.println(n);
+				
 				tb_num_pioche.add(n+1);
 		}
-		
-		//System.out.println(allist.get(n+1));
 			
 		}
 		Collections.sort(tb_num_pioche);

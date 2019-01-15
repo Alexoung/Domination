@@ -76,6 +76,11 @@ public class Plateau {
 		String crown_1 = Domino.get(0);
 		String type_2 = Domino.get(3);
 		String crown_2 = Domino.get(2);
+		int lgn ;
+		int cln ;
+		int a_lgn;
+		int a_cln;
+		boolean trop_long = false;
 		
 		System.out.println("DEFAUSSER LE DOMINO ?");
 		String defausser = scan.nextLine();
@@ -83,7 +88,7 @@ public class Plateau {
 			return grille;
 		
 		}
-		
+		do {
 		do{
 			System.out.println("pose horizontale (h) ou vertivale (v)");
 			ho_ve = scan.nextLine();
@@ -100,12 +105,9 @@ public class Plateau {
 			}
 		}
 		while(part_pos.equals(type_1)==false && part_pos.equals(type_2)==false);
-		int lgn ;
-		int cln ;
-		int a_lgn;
-		int a_cln;
-		Boolean trop_long = null;
-		do {
+		
+		//Boolean trop_long = null;
+		
 			
 			System.out.println("coordonnées de la partie a poser");
 			System.out.println("ligne");
@@ -143,10 +145,10 @@ public class Plateau {
 				}
 				
 			}
-			System.out.println(pris(lgn-1,cln-1,grille));
-			System.out.println(pris(a_lgn-1, a_cln-1, grille));
-			System.out.println(okautour(lgn-1,cln-1,grille, part_pos));
-			System.out.println(okautour(a_lgn-1,a_cln-1,grille,part_autre));
+//			System.out.println(pris(lgn-1,cln-1,grille));
+//			System.out.println(pris(a_lgn-1, a_cln-1, grille));
+//			System.out.println(okautour(lgn-1,cln-1,grille, part_pos));
+//			System.out.println(okautour(a_lgn-1,a_cln-1,grille,part_autre));
 			if ( placement_bon(lgn,cln,a_lgn,a_cln, grille, part_pos, part_autre))  {
 			try {
 				if (part_pos.equals(type_1) && ho_ve.equals("h") ){
@@ -218,7 +220,7 @@ public class Plateau {
 			
 			}
 			else {
-				System.out.println("impossible de placer 'check'");
+				System.out.println("impossible de placer ");
 				
 			}
 			
@@ -229,7 +231,7 @@ public class Plateau {
 	}
 	
 	public static String confirmation() {
-		System.out.println("confirmer cette dispo?");
+		System.out.println("confirmer cette disposition?");
 		System.out.println("oui/non");
 		Scanner scan = new Scanner(System.in);
 		String conf = scan.nextLine();

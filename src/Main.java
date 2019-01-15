@@ -6,11 +6,13 @@ import java.util.Random;
 import java.util.Scanner;
 import java.util.Stack;
 
+import javax.swing.JOptionPane;
+
 public class Main {
 
 	public static void main(String[] args) {
 		//IMPORATATION DE LA LISTE CSV
-		
+
 		ArrayList<ArrayList<String>> allist = Dominos.importation();
 
 
@@ -23,14 +25,20 @@ public class Main {
 		next_order.add(null);
 		next_order.add(null);
 		next_order.add(null);
-		//System.out.println(next_order.size());
+		
+		//Fenetre fend = new Fenetre("début");
+		
 		int nbj;
+		
 
 
-		do{System.out.println("Nombre de joueurs?");
+		do{
+		System.out.println("Nombre de joueurs?");
 		Scanner scan = new Scanner(System.in);
-		nbj = scan.nextInt();}
-		while(nbj>4);
+		nbj = scan.nextInt();
+			//String retour = JOptionPane.showInputDialog(fend, "nbj?", "nbj");
+//nbj=Integer.parseInt(retour);
+		}while(nbj>4);
 		Joueur[] ljoueurs = new Joueur[nbj];
 		ArrayList<String> dispcouleur = new ArrayList<String>();
 		dispcouleur.add("bleu");
@@ -46,9 +54,6 @@ public class Main {
 			//System.out.println(n);
 		}
 
-		
-		
-		
 
 
 
@@ -105,7 +110,7 @@ public class Main {
 			int classement =0;
 
 			while(currentpioche.isEmpty()==false) {
-				
+
 
 
 				int vajouer=tourp.getCurrent_order().get(0);
@@ -119,10 +124,10 @@ public class Main {
 					Plateau.afficher(ljoueurs[vajouer].getGrille());
 					grille_suivante = Plateau.poser(allist.get(tourp.getLast_pioche().get(classement)), ljoueurs[vajouer].getGrille());
 					Plateau.afficher(grille_suivante);
-					//conf = Plateau.confirmation();
-				}//MANQUE CONFIRMATION ET ANNULATION DE LA DISPOSITION SI NON CONFIRMEE
+					
+				}
 				while(Plateau.confirmation().equals("oui")==false);
-				
+
 				ljoueurs[vajouer].setGrille(grille_suivante);
 				ljoueurs[vajouer].getFen().color_fenetre(ljoueurs[vajouer]);
 
@@ -131,8 +136,7 @@ public class Main {
 				Plateau.afficher(grille_init);
 
 				System.out.println("\n"+"Dominos disponibles" + "\n");
-				//System.out.println("current " + current_order);
-				//System.out.println("next " + next_order);
+			
 				System.out.println(allist.get(0));
 				Iterator<Integer> iterator= currentpioche.iterator();
 				while(iterator.hasNext()) {
@@ -153,7 +157,7 @@ public class Main {
 
 				tourp.setNext_order(next_order);
 				classement++;
-				
+
 				if(grd_pioche.empty()) {
 					System.out.println("\n" + ">>> Tour de "+ ljoueurs[vajouer].getName() + " en " +ljoueurs[vajouer].getColor());
 					do{
@@ -162,13 +166,13 @@ public class Main {
 						Plateau.afficher(ljoueurs[vajouer].getGrille());
 						grille_suivante = Plateau.poser(allist.get(tourp.getLast_pioche().get(classement)), ljoueurs[vajouer].getGrille());
 						Plateau.afficher(grille_suivante);
-					}//MANQUE CONFIRMATION ET ANNULATION DE LA DISPOSITION SI NON CONFIRMEE
+					}
 					while(Plateau.confirmation().equals("oui")==false);
 					ljoueurs[vajouer].getFen().color_fenetre(ljoueurs[vajouer]);
 					ljoueurs[vajouer].setGrille(grille_suivante);
-					
+
 				}
-			
+
 			}
 			tourp.setLast_pioche(pioche_complete);
 
