@@ -75,7 +75,7 @@ public class Joueur {
 				grille[i][j][1] = "0";
 			}
 		}
-		grille[4][4][0]= "2";
+		grille[4][4][0]= "Chateau";
 		list.remove(new String(couleur));
 		
 		return new Joueur(nom, couleur, grille);
