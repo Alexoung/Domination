@@ -36,8 +36,8 @@ public class Main {
 		System.out.println("Nombre de joueurs?");
 		Scanner scan = new Scanner(System.in);
 		nbj = scan.nextInt();
-			//String retour = JOptionPane.showInputDialog(fend, "nbj?", "nbj");
-//nbj=Integer.parseInt(retour);
+//		String retour = JOptionPane.showInputDialog(fend, "nbj?", "nbj");
+//		nbj=Integer.parseInt(retour);
 		}while(nbj>4);
 		Joueur[] ljoueurs = new Joueur[nbj];
 		ArrayList<String> dispcouleur = new ArrayList<String>();
@@ -90,7 +90,7 @@ public class Main {
 
 
 			int[] tb = new int[2];
-			tb = Dominos.selection(premiere_pioche);
+			tb = Dominos.selection(premiere_pioche, grd_pioche);
 			int select = tb[0];
 			int ordre_dom = prems_complet.indexOf(select);
 
@@ -103,6 +103,7 @@ public class Main {
 
 		String [][][] grille_suivante;
 		do {
+			
 			ArrayList<Integer> ordre_tour = new ArrayList<Integer>(tourp.getNext_order());
 			tourp.setCurrent_order(ordre_tour);
 			ArrayList<Integer> currentpioche = Dominos.piocher(nbj, grd_pioche, allist);
@@ -110,13 +111,35 @@ public class Main {
 			int classement =0;
 
 			while(currentpioche.isEmpty()==false) {
+				
+				
 
 
-
+					System.out.println(currentpioche);
 				int vajouer=tourp.getCurrent_order().get(0);
 				tourp.getCurrent_order().remove(0);
+				System.out.println("grdempt  " + grd_pioche.isEmpty());
+				
 
 
+				if(grd_pioche.isEmpty()) {
+					System.out.println("\n" + ">>> Tour de "+ ljoueurs[vajouer].getName() + " en " +ljoueurs[vajouer].getColor());
+					do{
+						System.out.println("Domino à placer");
+						System.out.println(allist.get(tourp.getLast_pioche().get(classement)) + "\n");
+						Plateau.afficher(ljoueurs[vajouer].getGrille());
+						grille_suivante = Plateau.poser(allist.get(tourp.getLast_pioche().get(classement)), ljoueurs[vajouer].getGrille());
+						Plateau.afficher(grille_suivante);
+					}
+					while(Plateau.confirmation().equals("oui")==false);
+					ljoueurs[vajouer].getFen().color_fenetre(ljoueurs[vajouer]);
+					ljoueurs[vajouer].setGrille(grille_suivante);
+					currentpioche.remove(0);
+					classement++;
+
+				}
+				
+				else {
 				System.out.println("\n" + ">>> Tour de "+ ljoueurs[vajouer].getName() + " en " +ljoueurs[vajouer].getColor());
 				do{
 					System.out.println("Domino à placer");
@@ -131,52 +154,43 @@ public class Main {
 				ljoueurs[vajouer].setGrille(grille_suivante);
 				ljoueurs[vajouer].getFen().color_fenetre(ljoueurs[vajouer]);
 
-				System.out.println("Grille de " + ljoueurs[vajouer].getName());
-				String[][][] grille_init = ljoueurs[vajouer].getGrille();
-				Plateau.afficher(grille_init);
+				
 
-				System.out.println("\n"+"Dominos disponibles" + "\n");
-			
-				System.out.println(allist.get(0));
-				Iterator<Integer> iterator= currentpioche.iterator();
-				while(iterator.hasNext()) {
-					try {
-						System.out.println(allist.get(iterator.next()));
+				
+
+					
+					System.out.println("Grille de " + ljoueurs[vajouer].getName());
+					String[][][] grille_init = ljoueurs[vajouer].getGrille();
+					Plateau.afficher(grille_init);
+
+					System.out.println("\n"+"Dominos disponibles" + "\n");
+				
+					System.out.println(allist.get(0));
+					Iterator<Integer> iterator= currentpioche.iterator();
+					while(iterator.hasNext()) {
+						try {
+							System.out.println(allist.get(iterator.next()));
+						}
+						catch(java.lang.IndexOutOfBoundsException e) {}
 					}
-					catch(java.lang.IndexOutOfBoundsException e) {}
-				}
 
-				int [] tb = Dominos.selection(currentpioche);
-				int select = tb[0];
-				int ordre_dom = pioche_complete.indexOf(select);
+					int [] tb = Dominos.selection(currentpioche, grd_pioche);
+					int select = tb[0];
+					int ordre_dom = pioche_complete.indexOf(select);
 
-				next_order.set(ordre_dom, vajouer);
-				System.out.println(next_order);
+					next_order.set(ordre_dom, vajouer);
+					System.out.println(next_order);
 
-
-
-				tourp.setNext_order(next_order);
-				classement++;
-
-				if(grd_pioche.empty()) {
-					System.out.println("\n" + ">>> Tour de "+ ljoueurs[vajouer].getName() + " en " +ljoueurs[vajouer].getColor());
-					do{
-						System.out.println("Domino à placer");
-						System.out.println(allist.get(tourp.getLast_pioche().get(classement)) + "\n");
-						Plateau.afficher(ljoueurs[vajouer].getGrille());
-						grille_suivante = Plateau.poser(allist.get(tourp.getLast_pioche().get(classement)), ljoueurs[vajouer].getGrille());
-						Plateau.afficher(grille_suivante);
-					}
-					while(Plateau.confirmation().equals("oui")==false);
-					ljoueurs[vajouer].getFen().color_fenetre(ljoueurs[vajouer]);
-					ljoueurs[vajouer].setGrille(grille_suivante);
-
+					tourp.setNext_order(next_order);
+					classement++;
+					
+					
 				}
 
 			}
 			tourp.setLast_pioche(pioche_complete);
 
-		}while(grd_pioche.empty()==false);
+		}while(grd_pioche.isEmpty()==false);
 
 
 

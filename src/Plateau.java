@@ -57,7 +57,7 @@ public class Plateau {
 	}
 		
 	
-	public static String[][][] poser (ArrayList<String> Domino, String[][][] grille) {
+	public static  String[][][] poser (ArrayList<String> Domino, String[][][] grille) {
 		
 		String[][][] grille_cop= new String[9][9][2];
 		for (int i=0; i<9 ; i++) {
@@ -81,14 +81,17 @@ public class Plateau {
 		int a_lgn;
 		int a_cln;
 		boolean trop_long = false;
-		
+		/*         CHANGEMENT              */
+		System.out.println("Entrer pour jouer");
+		do {
+			scan.skip("((?<!\\R)\\s)*");
 		System.out.println("DEFAUSSER LE DOMINO ?");
 		String defausser = scan.nextLine();
 		if (defausser.equals("oui")) {
 			return grille;
 		
 		}
-		do {
+		
 		do{
 			System.out.println("pose horizontale (h) ou vertivale (v)");
 			ho_ve = scan.nextLine();
