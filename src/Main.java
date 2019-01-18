@@ -197,7 +197,7 @@ public class Main {
 		//FIN DE JEU - Calcul des scores et determination du gagnant
 		int [][] scoresJoueurs = new int[nbj][3];
 		for(int i = 0; i<nbj; i++) {
-			int[] scoreJoueur = Plateau.compte_pts(ljoueurs[i].getGrille());
+			int[] scoreJoueur = Plateau.compte_pts(i+1, ljoueurs[i].getGrille());
 			scoresJoueurs[i] = scoreJoueur;
 		}
 		int scoreMax = 0; int casesMax = 0; int couronnesMax = 0;
