@@ -346,7 +346,7 @@ public class Plateau {
 		voisinsDomaine.add(indexVoisinD);
 	}
 	
-	public static int[] compte_pts(String[][][] grille){
+	public static int[] compte_pts(int numj, String[][][] grille){
 		int[] scoreJoueur = new int[3];
 		ArrayList<ArrayList<ArrayList<Integer>>> indexParType = new ArrayList<ArrayList<ArrayList<Integer>>>(6);
 		String[] terrainType = {"Champs","Foret","Mer","Prairie","Mine","Montagne"};
@@ -424,7 +424,7 @@ public class Plateau {
 		scoreJoueur[0] = scoreTotal;
 		scoreJoueur[1] = casesTotal;
 		scoreJoueur[2] = couronnesTotal;
-		System.out.println("Le score total du joueur est " + scoreTotal + ".");
+		System.out.println("Le score total du joueur " + numj + " est " + scoreTotal + ".");
 		return scoreJoueur;
 	}
 
