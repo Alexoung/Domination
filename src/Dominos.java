@@ -78,7 +78,7 @@ public class Dominos {
 		
 		ArrayList<Integer> tb_num_pioche = new ArrayList<Integer>();
 		if (nbj == 2) {
-			System.out.println("hello");
+			//System.out.println("hello");
 			for (int i=0;  i<4; i++) {
 				int n = pioche.pop();
 				System.out.println(n);
@@ -107,12 +107,18 @@ public class Dominos {
 		System.out.println(a_enlever + " dominos ont été retirés");
 	}
 	
-	public static int[] selection(ArrayList<Integer> nbpioche) {
-		
+	public static int[] selection(ArrayList<Integer> nbpioche, Stack<Integer> grd_pioche) {
 		Scanner scan = new Scanner(System.in);
 		int select;
 		int indexselect;
 		int[] tb= new int[2];
+		
+		if(grd_pioche.isEmpty()) {
+			tb[0]=0;
+			tb[1]=0;
+			return tb;
+		}
+		else {
 		do{
 			System.out.println("Donner le numero du domino que vous voulez prendre");
 			select = scan.nextInt();
@@ -128,7 +134,7 @@ public class Dominos {
 		return tb;
 	}
 
-
+	}
 }
 
 
